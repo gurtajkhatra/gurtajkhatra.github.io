@@ -3,11 +3,6 @@
 //Create JSON object from the text boxes
 
 
-
-//The task number on the list
-var i = 0;
-
-
 function removeTask(loTasksDiv, taskDiv){
 	var task = document.getElementById(taskDiv);
 	var taskList = document.getElementById(loTasksDiv);
@@ -37,20 +32,16 @@ function createTask(){
 	secBox.setAttribute("name", "sec");
 
 
-	i+=1;
-
-
 	newTaskElement.appendChild(taskBox);
 	newTaskElement.appendChild(minBox);
 	newTaskElement.appendChild(secBox);
 	tasklist.appendChild(newTaskElement);
-	increment();
 	return false;
 }
 
 //Converts time represented as minutes and seconds to that same value in seconds
 function convertMinutesAndSecondsToSeconds(minutes, seconds){
-	return minutes*60+seconds;
+	return parseInt(minutes*60)+parseInt(seconds);
 }
 
 
@@ -60,20 +51,19 @@ function createJSONFromTextBoxes(){
 	var minutes = document.getElementsByName("min");
 	var seconds = document.getElementsByName("sec");
 	
-	var jsonString = "{";
-	for (int j = 0; j<taskNames.length*2-1; j++) {
-		if(j%2 == 0) {
-			jsonString = jsonString + j + ":" + taskNames[j/2].value + ",";
-		}
-		else {
-			jsonString = jsonString + j + ":" + convertMinutesAndSecondsToSeconds(minutes[j/2].value, seconds[j/2].value) + ",";
+	var jsonString = '{ \"tasks\" : [';
+	for (var j = 0; j<taskNames.length; j++) {
+		jsonString = jsonString + "{ \"name\":" + "\"" + taskNames[j].value + "\"" + " , \"time\":" + convertMinutesAndSecondsToSeconds(minutes[j].value, seconds[j].value) + "}";
+		if (j != taskNames.length-1) {
+			jsonString = jsonString + ",";
 		}
 	}
-	jsonString = jsonString + (taskNames.length*2 -1) + ":" + convertMinutesAndSecondsToSeconds(minutes[taskNames.length-1], seconds[taskNames.length-1]) + "}";
+	jsonString = jsonString + "]}";
+	return jsonString;
 }
 
-function buttonPressed(){
-	document.body.style.backgroundColor = "red";
+//When the putton 
+function pushToPebble(){
 	location.href = 'pebblejs://close#success' + encodeURIComponent(JSON.stringify(createJSONFromTextBoxes()));
 }
 
