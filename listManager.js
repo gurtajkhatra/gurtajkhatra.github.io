@@ -31,7 +31,6 @@ function createTask(){
 	minBox.setAttribute("name", "min");
 	secBox.setAttribute("name", "sec");
 
-
 	newTaskElement.appendChild(taskBox);
 	newTaskElement.appendChild(minBox);
 	newTaskElement.appendChild(secBox);
@@ -64,7 +63,7 @@ function createJSONFromTextBoxes(){
 
 //When the putton 
 function pushToPebble(){
-	location.href = 'pebblejs://close#success' + encodeURIComponent(JSON.stringify(createJSONFromTextBoxes()));
+	location.href = 'pebblejs://close' + encodeURIComponent(JSON.stringify(createJSONFromTextBoxes()));
 }
 
 
