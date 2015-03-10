@@ -63,7 +63,7 @@ function createJSONFromTextBoxes(){
 
 //When the putton 
 function pushToPebble(){
-	location.href = 'pebblejs://close' + encodeURIComponent(JSON.stringify(createJSONFromTextBoxes()));
+	location.href = 'pebblejs://close#' + encodeURIComponent(JSON.stringify(createJSONFromTextBoxes()));
 }
 
 
