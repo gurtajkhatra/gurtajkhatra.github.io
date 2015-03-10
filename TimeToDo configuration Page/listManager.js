@@ -50,9 +50,9 @@ function createJSONFromTextBoxes(){
 	var minutes = document.getElementsByName("min");
 	var seconds = document.getElementsByName("sec");
 	
-	var jsonString = '{tasks:[';
+	var jsonString = '{\"tasks\":[';
 	for (var j = 0; j<taskNames.length; j++) {
-		jsonString = jsonString + '{name:' + taskNames[j].value + ',time:'+convertMinutesAndSecondsToSeconds(minutes[j].value, seconds[j].value)+ '}';
+		jsonString = jsonString + '{\"name\":' + '\"' + taskNames[j].value + '\"' + ',\"time\":'+convertMinutesAndSecondsToSeconds(minutes[j].value, seconds[j].value)+ '}';
 		//jsonString = jsonString + "{name:" + taskNames[j].value + ",time:" + convertMinutesAndSecondsToSeconds(minutes[j].value, seconds[j].value) + "}";
 		if (j != taskNames.length-1) {
 			jsonString = jsonString + ",";
